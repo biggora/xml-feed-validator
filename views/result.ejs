@@ -19,7 +19,7 @@
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <i class="fa fa-times" aria-hidden="true"></i> Errors
+                                    <i class="fa fa-times" aria-hidden="true"></i> Errors (<%- data.errors.length %>)
                                 </a>
                             </h4>
                         </div>
@@ -28,7 +28,7 @@
 
                                 <% data.errors.forEach(function(erro){ %>
                                 <div class="alert alert-danger" role="alert">
-                                    <div>line <%- erro.line %>, column <%- erro.column %>: <strong><%- erro.text %></strong> (<%- erro.msgcount %> occurrences)</div>
+                                    <div><a href class="goToLine" data-line="<%- erro.line %>">line <%- erro.line %></a>, column <%- erro.column %>: <strong><%- erro.text %></strong> (<%- erro.msgcount %> occurrences)</div>
                                     <code><%- erro.type %></code>
                                 </div>
                                 <% }) %>
@@ -42,7 +42,7 @@
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h4 class="panel-title">
                                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warnings
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warnings (<%- data.warnings.length %>)
                                 </a>
                             </h4>
                         </div>
@@ -51,7 +51,7 @@
 
                                 <% data.warnings.forEach(function(warn){ %>
                                 <div class="alert alert-warning" role="alert">
-                                    <div>line <%- warn.line %>, column <%- warn.column %>: <strong><%- warn.text %></strong> (<%- warn.msgcount %> occurrences)</div>
+                                    <div><a href class="goToLine" data-line="<%- warn.line %>">line <%- warn.line %></a>, column <%- warn.column %>: <strong><%- warn.text %></strong> (<%- warn.msgcount %> occurrences)</div>
                                     <code><%- warn.type %></code>
                                 </div>
                                 <% }) %>
@@ -80,12 +80,13 @@
 
                 </div>
 
-                <div class="breadcrumb">
-                    <h4><i class="fa fa-code" aria-hidden="true"></i> Source</h4>
-                </div>
+                <h4><i class="fa fa-code" aria-hidden="true"></i> Source</h4>
 
-                <div id="codemirror" class="codemirror"></div>
-                <div class="cleancode" style="display: none"><%- (data.feedXml ? data.feedXml : 'Document not found.') %></div>
+                <textarea id="codemirror" class="codemirror" style="width: 100%;min-height:500px;border: none"><%- (data.feedXml ? data.feedXml : 'Document not found.') %></textarea>
+                <br/>
+                <div class="btn-group btn-group-justified" role="group" aria-label="ScrollTop">
+                    <a href="#top" class="btn btn-lg btn-primary">ScrollTop</a>
+                </div>
 
             </div>
         </div>

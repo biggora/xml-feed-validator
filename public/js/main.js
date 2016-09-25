@@ -35,11 +35,14 @@ FeedValidator.prototype.load = function (){
         }
     });
     $('.btn-validate').on('click', function () {
-        this.btn = $(this).button('loading');
+        FeedValidator.btn = $(this).button('loading');
     });
     if(typeof CodeMirror !== 'undefined') {
-        this.editor = CodeMirror(document.getElementById('codemirror'), {
-            value: $('.cleancode').html(),
+        CodeMirror.commands.jumpToLine = function(cm) {
+            var line = Number(prompt("Where", ""));
+            if (!isNaN(line)) cm.setCursor(line, 0);
+        };
+        FeedValidator.editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
             mode: "xml",
             readOnly: true,
             styleActiveLine: true,
@@ -47,6 +50,21 @@ FeedValidator.prototype.load = function (){
             theme: 'dracula'
         });
     }
+
+    function jumpToLine(i) {
+        var t = FeedValidator.editor.charCoords({line: i, ch: 0}, "local").top;
+        var middleHeight = FeedValidator.editor.getScrollerElement().offsetHeight / 2;
+        FeedValidator.editor.scrollTo(null, middleHeight - 5 - t);
+        FeedValidator.editor.setCursor({line: i, ch: 0});// t - middleHeight - 5
+        console.log('jumpToLine', t, middleHeight, middleHeight - 5 - t)
+    }
+
+    $('.goToLine').click(function(e){
+        e.preventDefault();
+        var line = $(this).data('line');
+        jumpToLine(line);
+    });
+
 };
 
 

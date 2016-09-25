@@ -22,6 +22,8 @@
     # Run project
     $ npm start
 
+the local server starts at localhost:3000
+
 ### Credits
 
 * [Node.js](http://nodejs.org/): Amazing javascript asynchronous IO library, install manually.

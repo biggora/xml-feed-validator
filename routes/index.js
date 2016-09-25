@@ -12,6 +12,11 @@ router.get('/', function (req, res, next) {
     });
 });
 
+/* GET feed validation page redirect to root. */
+router.get('/validate', function (req, res, next) {
+    res.redirect('/');
+});
+
 /* POST feed validation page. */
 router.post('/validate', function (req, res, next) {
     var body = req.body || {};
