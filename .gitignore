@@ -1,0 +1,8 @@
+*.bak
+*.log
+.idea/
+node_modules/
+tmp/
+uploads/**/*
+/public/vendor
+.DS_Store

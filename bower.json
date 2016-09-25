@@ -1,0 +1,19 @@
+{
+  "name": "XMLFeedValidator",
+  "description": "XML Feed Validator for Atom and RSS and KML",
+  "author": "Alexey Gordeyev",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "jquery": "2.2.0",
+    "font-awesome": "^4.0.0",
+    "jquery-validation": "^1.14.0",
+    "html5shiv": "^3.7.3",
+    "respond": "^1.4.2",
+    "moment": "^2.10.6",
+    "animate.css": "^3.4.0",
+    "codemirror": "^5.19.0"
+  },
+  "devDependencies": {}
+}

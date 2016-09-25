@@ -1,0 +1,100 @@
+<% layout('./_layout') -%>
+
+<%- partial('./_form') %>
+
+<div class="container">
+
+    <div class="row">
+        <!-- isValid -->
+        <!-- errors -->
+        <!-- warnings -->
+        <div class="col-lg-12">
+            <div id="result" class="<%- (data.isValid ? 'valid' : 'invalid') %>">
+
+                <h3><%- (data.isValid ? 'valid' : 'This feed does not validate.') %></h3>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% if(data.errors.length) { %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <i class="fa fa-times" aria-hidden="true"></i> Errors
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+
+                                <% data.errors.forEach(function(erro){ %>
+                                <div class="alert alert-danger" role="alert">
+                                    <div>line <%- erro.line %>, column <%- erro.column %>: <strong><%- erro.text %></strong> (<%- erro.msgcount %> occurrences)</div>
+                                    <code><%- erro.type %></code>
+                                </div>
+                                <% }) %>
+
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if(data.warnings.length) { %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warnings
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+
+                                <% data.warnings.forEach(function(warn){ %>
+                                <div class="alert alert-warning" role="alert">
+                                    <div>line <%- warn.line %>, column <%- warn.column %>: <strong><%- warn.text %></strong> (<%- warn.msgcount %> occurrences)</div>
+                                    <code><%- warn.type %></code>
+                                </div>
+                                <% }) %>
+
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+<!--
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+
+
+                            </div>
+                        </div>
+                    </div>
+-->
+
+                </div>
+
+                <div class="breadcrumb">
+                    <h4><i class="fa fa-code" aria-hidden="true"></i> Source</h4>
+                </div>
+
+                <div id="codemirror" class="codemirror"></div>
+                <div class="cleancode" style="display: none"><%- (data.feedXml ? data.feedXml : 'Document not found.') %></div>
+
+            </div>
+        </div>
+
+    </div>
+    <link rel='stylesheet' href='/vendor/codemirror/lib/codemirror.css' />
+    <link rel="stylesheet" href="/vendor/codemirror/theme/dracula.css">
+    <script type="text/javascript" charset="utf-8" src="/vendor/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/vendor/codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/vendor/codemirror/mode/xml/xml.js"></script>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center search-page-header">
+                <h1>
+                    <i class="fa fa-rss"></i>
+                    <%- title %>
+                </h1>
+                <p><%- description %></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <form class="validate" method="post" action="/validate" novalidate="novalidate" role="form">
+                <div class="input-group input-group-lg">
+                    <input value="<%- feed_url %>" minlength="10" required="1" name="feed_url" type="text" class="form-control" placeholder="Enter feed url here...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary btn-validate" data-loading-text="Validating..." type="submit">
+                            <i class="fa fa-rss-square" aria-hidden="true"></i> Validate!
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
