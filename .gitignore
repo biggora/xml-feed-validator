@@ -4,5 +4,5 @@
 node_modules/
 tmp/
 uploads/**/*
-/public/vendor
+/public/vendor/
 .DS_Store
