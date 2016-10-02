@@ -3,14 +3,18 @@
  */
 var FeedValidator = function () {
     this.editor = null;
-    this.btn = null;
+    this.btnValidate = null;
+    this.btnPreview = null;
 };
 
 FeedValidator.prototype.load = function (){
+    FeedValidator.btnValidate = $('.btn-validate');
+    FeedValidator.btnPreview = $('.btn-preview');
     $.validator.setDefaults({
         highlight: function(element) {
             $(element).closest('.form-group').addClass('has-error');
-            $('.btn-validate').button('reset');
+            FeedValidator.btnValidate.button('reset');
+            FeedValidator.btnPreview.button('reset');
         },
         unhighlight: function(element) {
             $(element).closest('.form-group').removeClass('has-error');
@@ -34,9 +38,16 @@ FeedValidator.prototype.load = function (){
             }
         }
     });
-    $('.btn-validate').on('click', function () {
-        FeedValidator.btn = $(this).button('loading');
+    FeedValidator.btnValidate.on('click', function (e) {
+        FeedValidator.btnValidate.button('loading');
     });
+    FeedValidator.btnPreview.on('click', function (e) {
+        FeedValidator.btnPreview.button('loading');
+        $(this).parents('form')
+            .attr('action', '/preview')
+            .trigger('submit');
+    });
+
     if(typeof CodeMirror !== 'undefined') {
         CodeMirror.commands.jumpToLine = function(cm) {
             var line = Number(prompt("Where", ""));

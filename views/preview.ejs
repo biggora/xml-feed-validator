@@ -1,0 +1,47 @@
+<% layout('./_layout') -%>
+<%- partial('./_form') %>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <br/>
+
+            <div id="result">
+                <% if(!data.length) { %>
+                <div class="alert alert-warning" role="alert">...</div>
+                <% } %>
+                <% data.forEach(function(item) { %>
+                <div class="media">
+                    <div class="media-left">
+                        <a target="_blank" href="<%- item.link %>">
+                            <img width="250px" class="media-object" src="<%- item.imgUrl %>" alt="<%- item.title %>">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading">
+                            <a target="_blank" href="<%- item.link %>">
+                                <%- item.title %>
+                            </a>
+                        </h3>
+                        <div style="height: 100px;overflow: hidden">
+                            <%- item.description %>
+                        </div>
+                        <div class="pubDate"><%- item.pubDate %></div>
+                        <div>
+                            <% if(item.author && item.author !== ''){ %><span class="author">Author: <%- item.author %></span><% } %>
+                            <% if(item.category && item.category !== ''){ %><span class="category">Category: <%- item.category %></span><% } %>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
